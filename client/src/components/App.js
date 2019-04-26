@@ -10,6 +10,7 @@ class App extends React.Component{
       pokemon: []
     }
     this.getPokemon = this.getPokemon.bind(this);
+    this.handleEdit = this.handleEdit.bind(this);
   }
   componentDidMount() {
     this.setState({
@@ -27,13 +28,21 @@ class App extends React.Component{
       });
     })
   }
+  handleEdit(index){
+    var newPokemon = this.state.pokemon.slice();
+    var newName = prompt('Edit !');
+    newPokemon[index].name = newName;
+    this.setState({
+      pokemon: newPokemon
+    })
+  }
   
   
   render() {
     return (
       <div>
         <Search getPokemon= {this.getPokemon}/> 
-        <PokemonList pokemons={this.state.pokemon}/>
+        <PokemonList pokemons={this.state.pokemon} handleEdit={this.handleEdit}/>
       </div>
     )
   }
